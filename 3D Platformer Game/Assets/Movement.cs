@@ -1,30 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Movement : MonoBehaviour
 {
-    int Speed = 5;
+    Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.W)){
-            transform.Translate(Vector3.forward * Speed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.A)){
-            transform.Translate(Vector3.left * Speed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.S)){
-            transform.Translate(Vector3.back * Speed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.D)){
-            transform.Translate(Vector3.right * Speed * Time.deltaTime);
+        float speed = 2000;
+        bool isJumping;
+        int amount;
+
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+
+        Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
+
+        if(direction.magnitude >= 0.1f){
+            rb.AddForce(direction * speed * Time.deltaTime);
         }
     }
 }
