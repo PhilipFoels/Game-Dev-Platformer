@@ -6,6 +6,8 @@ TagManager:
   tags:
   - collision
   - floor
+  - checkpoint
+  - finish
   layers:
   - Default
   - TransparentFX

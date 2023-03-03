@@ -87,10 +87,31 @@ public class Movement : MonoBehaviour
             rb.drag = groundDrag;
         else
             rb.drag = 0;
+
         if (gameObject.transform.position.y <= 0) { //checks to see if the player's y coordinate is less than or equal to zero
             gameObject.transform.position = new Vector3(xpos, ypos, zpos); //changes the player's position to the position held in xpos, ypos, and zpos
+            rb.velocity = new Vector3(0f, 0f, 0f); //Resets the player's velocities
         }
 
+    }
+
+
+    void OnCollisionEnter(Collision col) //Checks for a collision
+    {
+        if (col.gameObject.tag == "checkpoint")//Checks if the collision is tagged as a checkpoint
+        {
+            //Sets the reset positions to the checkpoint
+            xpos = col.gameObject.transform.position.x;
+            ypos = col.gameObject.transform.position.y + 2;
+            zpos = col.gameObject.transform.position.z;
+
+        }
+        //doesnt work right now
+        if (col.gameObject.tag == "finsih")//Checks if the collision is tagged as a finish
+        {
+            //Goes to the next scene
+            //rb.LoadScene(rb.GetActiveScene().buildIndex + 1);
+        }
     }
 
     private void FixedUpdate()
