@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
+    Text LivesText;
+    
+
     [Header("Player")]
     public float xpos;
     public float ypos;
@@ -46,6 +50,8 @@ public class Movement : MonoBehaviour
 
 
     public Transform orientation;
+    public int startLives;
+    public int livesLeft;
 
     float horizontalInput;
     float verticalInput;
@@ -75,6 +81,8 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
+        LivesText.text = "Lives: " + livesLeft.ToString();
+
         // ground check
         grounded = Physics.CheckSphere(groundCheck.position, 0.2f, whatIsGround); //checks whether or not the player is on the ground
 
@@ -89,10 +97,17 @@ public class Movement : MonoBehaviour
             rb.drag = 0;
 
         if (gameObject.transform.position.y <= 0) { //checks to see if the player's y coordinate is less than or equal to zero
+            livesLeft--;
             gameObject.transform.position = new Vector3(xpos, ypos, zpos); //changes the player's position to the position held in xpos, ypos, and zpos
             rb.velocity = new Vector3(0f, 0f, 0f); //Resets the player's velocities
         }
-
+        if (livesLeft == 0){
+            xpos = 0;
+            ypos = 10;
+            zpos = 0;
+            gameObject.transform.position = new Vector3(xpos, ypos, zpos);
+            livesLeft = 3;
+        }
     }
 
 
