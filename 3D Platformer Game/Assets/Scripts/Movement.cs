@@ -2,13 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
-    Text LivesText;
-    
-
     [Header("Player")]
     public float xpos;
     public float ypos;
@@ -58,6 +55,8 @@ public class Movement : MonoBehaviour
 
     Vector3 moveDirection;
 
+    GameObject [] allCheckpoints;
+
     Rigidbody rb;
 
     public MovementState state;
@@ -77,12 +76,12 @@ public class Movement : MonoBehaviour
         readyToJump = true;
 
         startYScale = transform.localScale.y;
+
+        allCheckpoints = GameObject.FindGameObjectsWithTag("checkpoint");
     }
 
     private void Update()
     {
-        LivesText.text = "Lives: " + livesLeft.ToString();
-
         // ground check
         grounded = Physics.CheckSphere(groundCheck.position, 0.2f, whatIsGround); //checks whether or not the player is on the ground
 
@@ -101,12 +100,17 @@ public class Movement : MonoBehaviour
             gameObject.transform.position = new Vector3(xpos, ypos, zpos); //changes the player's position to the position held in xpos, ypos, and zpos
             rb.velocity = new Vector3(0f, 0f, 0f); //Resets the player's velocities
         }
-        if (livesLeft == 0){
+        if (livesLeft < 0){
             xpos = 0;
             ypos = 10;
             zpos = 0;
             gameObject.transform.position = new Vector3(xpos, ypos, zpos);
             livesLeft = 3;
+            foreach (GameObject go in allCheckpoints){ //resets all of the deactivated checkpoints so they can all be used when the game is reset
+                if (!go.activeInHierarchy){
+                    go.SetActive(true);
+                }
+            }
         }
     }
 
@@ -119,13 +123,17 @@ public class Movement : MonoBehaviour
             xpos = col.gameObject.transform.position.x;
             ypos = col.gameObject.transform.position.y + 2;
             zpos = col.gameObject.transform.position.z;
-
+            
+            col.gameObject.SetActive(false); //makes is so checkpoints can't be used more than once
         }
         //doesnt work right now
-        if (col.gameObject.tag == "finsih")//Checks if the collision is tagged as a finish
+        if (col.gameObject.tag == "finish")//Checks if the collision is tagged as a finish
         {
             //Goes to the next scene
-            //rb.LoadScene(rb.GetActiveScene().buildIndex + 1);
+            int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+            if (SceneManager.sceneCountInBuildSettings > nextSceneIndex){
+                SceneManager.LoadScene(nextSceneIndex);
+            }
         }
     }
 
@@ -251,6 +259,7 @@ public class Movement : MonoBehaviour
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
+
     private void ResetJump()
     {
         readyToJump = true;
