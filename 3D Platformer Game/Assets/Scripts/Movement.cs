@@ -114,10 +114,20 @@ public class Movement : MonoBehaviour
         }
     }
 
-
+    void OnTriggerEnter(Collider col){
+        if (col.gameObject.tag == "checkpoint")//Checks if the collision is tagged as a checkpoint
+        {
+            //Sets the reset positions to the checkpoint
+            xpos = col.gameObject.transform.position.x;
+            ypos = 9;
+            zpos = col.gameObject.transform.position.z;
+            
+            col.gameObject.SetActive(false); //makes is so checkpoints can't be used more than once
+        }
+    }
     void OnCollisionEnter(Collision col) //Checks for a collision
     {
-        if (col.gameObject.tag == "checkpoint")//Checks if the collision is tagged as a checkpoint
+        /*if (col.gameObject.tag == "checkpoint")//Checks if the collision is tagged as a checkpoint
         {
             //Sets the reset positions to the checkpoint
             xpos = col.gameObject.transform.position.x;
@@ -125,8 +135,7 @@ public class Movement : MonoBehaviour
             zpos = col.gameObject.transform.position.z;
             
             col.gameObject.SetActive(false); //makes is so checkpoints can't be used more than once
-        }
-        //doesnt work right now
+        }*/
         if (col.gameObject.tag == "finish")//Checks if the collision is tagged as a finish
         {
             //Goes to the next scene
