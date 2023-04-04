@@ -127,15 +127,6 @@ public class Movement : MonoBehaviour
     }
     void OnCollisionEnter(Collision col) //Checks for a collision
     {
-        /*if (col.gameObject.tag == "checkpoint")//Checks if the collision is tagged as a checkpoint
-        {
-            //Sets the reset positions to the checkpoint
-            xpos = col.gameObject.transform.position.x;
-            ypos = col.gameObject.transform.position.y + 2;
-            zpos = col.gameObject.transform.position.z;
-            
-            col.gameObject.SetActive(false); //makes is so checkpoints can't be used more than once
-        }*/
         if (col.gameObject.tag == "finish")//Checks if the collision is tagged as a finish
         {
             //Goes to the next scene
