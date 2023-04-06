@@ -111,6 +111,8 @@ public class Movement : MonoBehaviour
                     go.SetActive(true);
                 }
             }
+            int startScene = 0;
+            SceneManager.LoadScene(startScene);
         }
     }
 

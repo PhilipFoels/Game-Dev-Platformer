@@ -4,16 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-/*public class StartButton : MonoBehaviour
-{
-    void Start()
-    {
-        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        if (SceneManager.sceneCountInBuildSettings > nextSceneIndex){
-            SceneManager.LoadScene(nextSceneIndex);
-        }
-    }
-}*/
 public class StartButton : MonoBehaviour {
 	public Button startButton;
 
@@ -23,9 +13,10 @@ public class StartButton : MonoBehaviour {
 	}
 
 	void TaskOnClick(){
-		int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        if (SceneManager.sceneCountInBuildSettings > nextSceneIndex){
-            SceneManager.LoadScene(nextSceneIndex);
-        }
+		//int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        //if (SceneManager.sceneCountInBuildSettings > nextSceneIndex){
+        //    SceneManager.LoadScene(nextSceneIndex);
+        //}
+        SceneManager.LoadScene(2);
 	}
 }
