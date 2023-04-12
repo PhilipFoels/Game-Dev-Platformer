@@ -8,6 +8,9 @@ TagManager:
   - floor
   - checkpoint
   - finish
+  - change
+  - moving
+  - obstacle
   layers:
   - Default
   - TransparentFX
