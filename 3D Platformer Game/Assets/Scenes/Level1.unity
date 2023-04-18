@@ -533,11 +533,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9218817674054509084, guid: 08f0e87e72d8ca5428dc9f44364aa09a, type: 3}
       propertyPath: sensX
-      value: 1000
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 9218817674054509084, guid: 08f0e87e72d8ca5428dc9f44364aa09a, type: 3}
       propertyPath: sensY
-      value: 1000
+      value: 150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08f0e87e72d8ca5428dc9f44364aa09a, type: 3}
