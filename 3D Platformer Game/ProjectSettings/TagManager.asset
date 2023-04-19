@@ -11,6 +11,7 @@ TagManager:
   - change
   - moving
   - obstacle
+  - coin
   layers:
   - Default
   - TransparentFX

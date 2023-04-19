@@ -49,6 +49,7 @@ public class Movement : MonoBehaviour
     public Transform orientation;
     public int startLives;
     public int livesLeft;
+    public int score;
 
     float horizontalInput;
     float verticalInput;
@@ -136,6 +137,11 @@ public class Movement : MonoBehaviour
             if (SceneManager.sceneCountInBuildSettings > nextSceneIndex){
                 SceneManager.LoadScene(nextSceneIndex);
             }
+        }
+        if (col.gameObject.tag == "coin")
+        {
+            col.gameObject.SetActive(false);
+            score += 10;
         }
     }
 
