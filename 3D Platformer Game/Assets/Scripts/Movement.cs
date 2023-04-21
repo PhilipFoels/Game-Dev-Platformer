@@ -49,7 +49,7 @@ public class Movement : MonoBehaviour
     public Transform orientation;
     public int startLives;
     public int livesLeft;
-    public int score;
+    public int score = 0;
 
     float horizontalInput;
     float verticalInput;
@@ -57,6 +57,7 @@ public class Movement : MonoBehaviour
     Vector3 moveDirection;
 
     GameObject [] allCheckpoints;
+    GameObject [] allCoins;
 
     Rigidbody rb;
 
@@ -79,6 +80,7 @@ public class Movement : MonoBehaviour
         startYScale = transform.localScale.y;
 
         allCheckpoints = GameObject.FindGameObjectsWithTag("checkpoint");
+        allCoins = GameObject.FindGameObjectsWithTag("coin");
     }
 
     private void Update()
@@ -107,11 +109,19 @@ public class Movement : MonoBehaviour
             zpos = 0;
             gameObject.transform.position = new Vector3(xpos, ypos, zpos);
             livesLeft = 3;
+            score = 0;
             foreach (GameObject go in allCheckpoints){ //resets all of the deactivated checkpoints so they can all be used when the game is reset
                 if (!go.activeInHierarchy){
                     go.SetActive(true);
                 }
             }
+            foreach (GameObject go in allCoins){
+                if (!go.activeInHierarchy){
+                    go.SetActive(true);
+                }
+            }
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             int startScene = 0;
             SceneManager.LoadScene(startScene);
         }
