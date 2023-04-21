@@ -9,22 +9,23 @@ public class Moving : MonoBehaviour
     public float yValue = 1f;
     public float zValue = 1f;
     public float speed = 1f;
+    public int zLength = 10;
     Vector3 direction = new Vector3(1f, 1f, 1f);
     public GameObject player;
 
     void Start()
     {
         //direction = new Vector3(xValue, yValue, zValue);
-        initialZ = transform.position.z;
+        initialZ = transform.position.z - initialZ;
 
     }
 
     void Update()
     {
-        if(gameObject.transform.position.z >= initialZ + 10)
+        if(gameObject.transform.position.z >= initialZ + zLength)
         {
            speed *= -1;
-        } else if (gameObject.transform.position.z <= initialZ - 10){
+        } else if (gameObject.transform.position.z <= initialZ - zLength){
            speed *= -1;
         }
 
