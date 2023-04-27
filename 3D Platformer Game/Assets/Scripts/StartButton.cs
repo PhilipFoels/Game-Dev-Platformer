@@ -17,6 +17,6 @@ public class StartButton : MonoBehaviour {
         //if (SceneManager.sceneCountInBuildSettings > nextSceneIndex){
         //    SceneManager.LoadScene(nextSceneIndex);
         //}
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
 	}
 }

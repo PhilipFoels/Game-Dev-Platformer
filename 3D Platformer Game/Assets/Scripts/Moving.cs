@@ -5,14 +5,9 @@ using UnityEngine;
 public class Moving : MonoBehaviour
 {
     public float initialZ;
-    public float xValue = 1f;
-    public float yValue = 1f;
-    public float zValue = 1f;
     public float speed = 1f;
-    public int zLength = 10;
-    Vector3 direction = new Vector3(1f, 1f, 1f);
     public GameObject player;
-
+    public int zLength = 10;
     void Start()
     {
         //direction = new Vector3(xValue, yValue, zValue);
@@ -31,12 +26,4 @@ public class Moving : MonoBehaviour
 
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
     }
-    
-    /*void OnCollisionEnter(Collision col) //Checks for a collision
-    {
-        if (col.gameObject.tag == "change")
-        {
-            speed *= -1;
-        }
-    }*/
 }
