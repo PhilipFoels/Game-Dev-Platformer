@@ -7,12 +7,14 @@ using UnityEngine.SceneManagement;
 public class BackButton : MonoBehaviour
 {	
 	public Button backButton;
-
+	public GameObject StartUI;
+	public GameObject HelpPanel;
     void Start () {
 		Button btn = backButton.GetComponent<Button>();
 		btn.onClick.AddListener(TaskOnClick);
 	}
 	void TaskOnClick(){
-		SceneManager.LoadScene(0);
+		StartUI.SetActive(true);
+		HelpPanel.SetActive(false);
 	}
 }

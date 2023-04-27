@@ -7,12 +7,15 @@ using UnityEngine.SceneManagement;
 public class HelpButton : MonoBehaviour
 {	
 	public Button helpButton;
-
+	public GameObject OriginalUI;
+	public GameObject HelpPanel;
     void Start () {
+		HelpPanel.SetActive(false);
 		Button btn = helpButton.GetComponent<Button>();
 		btn.onClick.AddListener(TaskOnClick);
 	}
 	void TaskOnClick(){
-		SceneManager.LoadScene(1);
+		OriginalUI.SetActive(false);
+		HelpPanel.SetActive(true);
 	}
 }

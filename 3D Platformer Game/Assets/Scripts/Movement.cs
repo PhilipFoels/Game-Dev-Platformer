@@ -60,7 +60,7 @@ public class Movement : MonoBehaviour
     GameObject [] allCoins;
 
     Rigidbody rb;
-
+    public int checkpointScore = 10;
     public MovementState state;
     public enum MovementState
     {
@@ -134,8 +134,12 @@ public class Movement : MonoBehaviour
             xpos = col.gameObject.transform.position.x;
             ypos = 9;
             zpos = col.gameObject.transform.position.z;
-            
+            score += checkpointScore;
             col.gameObject.SetActive(false); //makes is so checkpoints can't be used more than once
+        }
+        if (col.gameObject.tag == "coin") {
+            col.gameObject.SetActive(false);
+            score += 10;
         }
     }
     void OnCollisionEnter(Collision col) //Checks for a collision
@@ -147,11 +151,6 @@ public class Movement : MonoBehaviour
             if (SceneManager.sceneCountInBuildSettings > nextSceneIndex){
                 SceneManager.LoadScene(nextSceneIndex);
             }
-        }
-        if (col.gameObject.tag == "coin")
-        {
-            col.gameObject.SetActive(false);
-            score += 10;
         }
     }
 
