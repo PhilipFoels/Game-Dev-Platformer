@@ -132,7 +132,7 @@ public class Movement : MonoBehaviour
         {
             //Sets the reset positions to the checkpoint
             xpos = col.gameObject.transform.position.x;
-            ypos = col.gameObject.transform.position.y;
+            ypos = 9;
             zpos = col.gameObject.transform.position.z;
             score += checkpointScore;
             col.gameObject.SetActive(false); //makes is so checkpoints can't be used more than once
