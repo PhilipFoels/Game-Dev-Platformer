@@ -56,11 +56,11 @@ public class Movement : MonoBehaviour
 
     Vector3 moveDirection;
 
-    GameObject [] allCheckpoints;
-    GameObject [] allCoins;
+    GameObject[] allCheckpoints;
+    GameObject[] allCoins;
 
     Rigidbody rb;
-    public int checkpointScore = 10;
+
     public MovementState state;
     public enum MovementState
     {
@@ -98,25 +98,31 @@ public class Movement : MonoBehaviour
         else
             rb.drag = 0;
 
-        if (gameObject.transform.position.y <= 0) { //checks to see if the player's y coordinate is less than or equal to zero
+        if (gameObject.transform.position.y <= 0)
+        { //checks to see if the player's y coordinate is less than or equal to zero
             livesLeft--;
             gameObject.transform.position = new Vector3(xpos, ypos, zpos); //changes the player's position to the position held in xpos, ypos, and zpos
             rb.velocity = new Vector3(0f, 0f, 0f); //Resets the player's velocities
         }
-        if (livesLeft < 0){
+        if (livesLeft < 0)
+        {
             xpos = 0;
             ypos = 10;
             zpos = 0;
             gameObject.transform.position = new Vector3(xpos, ypos, zpos);
             livesLeft = 3;
             score = 0;
-            foreach (GameObject go in allCheckpoints){ //resets all of the deactivated checkpoints so they can all be used when the game is reset
-                if (!go.activeInHierarchy){
+            foreach (GameObject go in allCheckpoints)
+            { //resets all of the deactivated checkpoints so they can all be used when the game is reset
+                if (!go.activeInHierarchy)
+                {
                     go.SetActive(true);
                 }
             }
-            foreach (GameObject go in allCoins){
-                if (!go.activeInHierarchy){
+            foreach (GameObject go in allCoins)
+            {
+                if (!go.activeInHierarchy)
+                {
                     go.SetActive(true);
                 }
             }
@@ -127,17 +133,21 @@ public class Movement : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider col){
+    void OnTriggerEnter(Collider col)
+    {
         if (col.gameObject.tag == "checkpoint")//Checks if the collision is tagged as a checkpoint
         {
             //Sets the reset positions to the checkpoint
             xpos = col.gameObject.transform.position.x;
-            ypos = 9;
+            ypos = col.gameObject.transform.position.y;
             zpos = col.gameObject.transform.position.z;
-            score += checkpointScore;
+
+            score += 10;
             col.gameObject.SetActive(false); //makes is so checkpoints can't be used more than once
         }
-        if (col.gameObject.tag == "coin") {
+
+        if (col.gameObject.tag == "coin")
+        {
             col.gameObject.SetActive(false);
             score += 10;
         }
@@ -148,9 +158,16 @@ public class Movement : MonoBehaviour
         {
             //Goes to the next scene
             int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-            if (SceneManager.sceneCountInBuildSettings > nextSceneIndex){
+            if (SceneManager.sceneCountInBuildSettings > nextSceneIndex)
+            {
                 SceneManager.LoadScene(nextSceneIndex);
             }
+        }
+        if (col.gameObject.tag == "obstacle")
+        {
+            livesLeft--;
+            gameObject.transform.position = new Vector3(xpos, ypos, zpos); //changes the player's position to the position held in xpos, ypos, and zpos
+            rb.velocity = new Vector3(0f, 0f, 0f); //Resets the player's velocities
         }
     }
 
