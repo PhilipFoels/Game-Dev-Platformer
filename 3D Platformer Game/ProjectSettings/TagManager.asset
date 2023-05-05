@@ -12,6 +12,7 @@ TagManager:
   - moving
   - obstacle
   - coin
+  - TrueBoolKeeper
   layers:
   - Default
   - TransparentFX
