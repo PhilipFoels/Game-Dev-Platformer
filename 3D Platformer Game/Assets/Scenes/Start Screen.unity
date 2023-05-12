@@ -155,6 +155,7 @@ MonoBehaviour:
   helpButton: {fileID: 1184679893}
   OriginalUI: {fileID: 1879084602}
   HelpPanel: {fileID: 2097356692}
+  HelpTrueBool: {fileID: 0}
 --- !u!4 &47631463
 Transform:
   m_ObjectHideFlags: 0
@@ -1046,6 +1047,7 @@ MonoBehaviour:
   backButton: {fileID: 1285683230}
   StartUI: {fileID: 1879084602}
   HelpPanel: {fileID: 2097356692}
+  HelpTrueBool: {fileID: 0}
 --- !u!4 &1037972787
 Transform:
   m_ObjectHideFlags: 0
