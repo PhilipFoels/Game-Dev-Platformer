@@ -61,6 +61,11 @@ public class Movement : MonoBehaviour
 
     Rigidbody rb;
 
+    public AudioSource jumpAudio;
+    public AudioSource deathAudio;
+    public AudioSource checkpointAudio;
+    public AudioSource coinAudio;
+
     public MovementState state;
     public enum MovementState
     {
@@ -101,6 +106,7 @@ public class Movement : MonoBehaviour
         if (gameObject.transform.position.y <= 0)
         { //checks to see if the player's y coordinate is less than or equal to zero
             livesLeft--;
+            deathAudio.Play();
             gameObject.transform.position = new Vector3(xpos, ypos, zpos); //changes the player's position to the position held in xpos, ypos, and zpos
             rb.velocity = new Vector3(0f, 0f, 0f); //Resets the player's velocities
         }
@@ -141,7 +147,7 @@ public class Movement : MonoBehaviour
             xpos = col.gameObject.transform.position.x;
             ypos = col.gameObject.transform.position.y;
             zpos = col.gameObject.transform.position.z;
-
+            checkpointAudio.Play();
             score += 10;
             col.gameObject.SetActive(false); //makes is so checkpoints can't be used more than once
         }
@@ -149,6 +155,7 @@ public class Movement : MonoBehaviour
         if (col.gameObject.tag == "coin")
         {
             col.gameObject.SetActive(false);
+            coinAudio.Play();
             score += 10;
         }
     }
@@ -166,6 +173,7 @@ public class Movement : MonoBehaviour
         if (col.gameObject.tag == "obstacle")
         {
             livesLeft--;
+            deathAudio.Play();
             gameObject.transform.position = new Vector3(xpos, ypos, zpos); //changes the player's position to the position held in xpos, ypos, and zpos
             rb.velocity = new Vector3(0f, 0f, 0f); //Resets the player's velocities
         }
@@ -292,6 +300,7 @@ public class Movement : MonoBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        jumpAudio.Play();
     }
 
     private void ResetJump()
